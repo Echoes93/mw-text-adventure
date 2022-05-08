@@ -3,7 +3,7 @@
 type frameData = {
   text: string,
   duration: int,
-  image: Js.Option.t<string>
+  image: Js.Option.t<string>,
 }
 
 type frameStage =
@@ -20,12 +20,12 @@ let make = (~frameData: frameData, ~unmount: unit => unit) => {
   }
 
   let backgroundStyle = switch frameData.image {
-    | Some(img) => ReactDOM.Style.make(~backgroundImage = `url(${img}`, ~backgroundSize = "auto 100%", ())
-    | None => ReactDOM.Style.make(~backgroundColor = "#282c34", ())
+  | Some(img) => ReactDOM.Style.make(~backgroundImage=`url(${img}`, ~backgroundSize="auto 100%", ())
+  | None => ReactDOM.Style.make(~backgroundColor="#282c34", ())
   }
-    
-  React.useEffect1(() => {
-    if (frameStage == Initial) {
+
+  React.useEffect(() => {
+    if frameStage == Initial {
       let _ = Js.Global.setTimeout(() => {
         setFrameStage(_ => Final)
       }, frameData.duration * 1000)
@@ -34,11 +34,11 @@ let make = (~frameData: frameData, ~unmount: unit => unit) => {
         unmount()
       }, 4950)
     }
-  
+
     None
-  }, [frameStage])
+  })
 
   <div className={"frame " ++ fade} style=backgroundStyle>
-    <p>{React.string(frameData.text)}</p>
+    <p> {React.string(frameData.text)} </p>
   </div>
 }

@@ -27,3 +27,6 @@ yarn-error.log*
 .merlin
 *.bs.js
 .bsb.lock
+
+# IDE
+/.vscode

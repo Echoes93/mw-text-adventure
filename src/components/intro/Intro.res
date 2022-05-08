@@ -8,7 +8,7 @@ let make = (~startGame) => {
 
 	let frameData = frames[state.currentIndex]
 	let key = state.currentIndex -> Js.Int.toString -> Js.String.concat("frame-")
-  	let unmount = () => dispatch(UnmountFrame)
+  let unmount = () => dispatch(UnmountFrame)
 
 	<div className="intro-container">
 		<IntroAudio />
