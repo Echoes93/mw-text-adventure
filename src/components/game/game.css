@@ -4,3 +4,11 @@
   background-attachment: fixed;
   background-position: center;
 }
+
+.disclaimer {
+  color: white;
+  font-size: 36px;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+}

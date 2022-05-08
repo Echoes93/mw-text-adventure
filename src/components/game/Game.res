@@ -5,8 +5,10 @@
 @react.component
 let make = () => {
   let backgroundStyle = ReactDOM.Style.make(~backgroundImage=`url(${img1}`, ())
+  let disclaimerText = "This is a static image"
 
   <div className="game-container" style=backgroundStyle>
     <audio autoPlay={true}> <source src={gameAudio} /> </audio>
+    <div className="disclaimer">{React.string(disclaimerText)}</div>
   </div>
 }
