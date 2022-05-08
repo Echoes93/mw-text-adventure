@@ -1,7 +1,5 @@
-@module("./images/intro_img_1.png") external img1: string = "default"
-@module("./images/intro_img_2.png") external img2: string = "default"
-@module("./images/intro_img_3.png") external img3: string = "default"
-@module("./images/intro_img_4.png") external img4: string = "default"
+@module("./images/intro-1.gif") external img1: string = "default"
+@module("./images/intro-2.gif") external img2: string = "default"
 
 let frames: array<Frame.frameData> = [
   {
@@ -23,22 +21,12 @@ let frames: array<Frame.frameData> = [
   },
   {
     text: ``,
-    duration: 5,
+    duration: 15,
     image: Some(img1)
   },
   {
     text: ``,
     duration: 5,
     image: Some(img2)
-  },
-  {
-    text: ``,
-    duration: 5,
-    image: Some(img3)
-  },
-  {
-    text: ``,
-    duration: 5,
-    image: Some(img4)
   },
 ]

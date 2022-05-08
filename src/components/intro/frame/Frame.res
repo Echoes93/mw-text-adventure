@@ -20,7 +20,7 @@ let make = (~frameData: frameData, ~unmount: unit => unit) => {
   }
 
   let backgroundStyle = switch frameData.image {
-    | Some(img) => ReactDOM.Style.make(~backgroundImage = `url(${img}`, ())
+    | Some(img) => ReactDOM.Style.make(~backgroundImage = `url(${img}`, ~backgroundSize = "auto 100%", ())
     | None => ReactDOM.Style.make(~backgroundColor = "#282c34", ())
   }
     
@@ -32,7 +32,7 @@ let make = (~frameData: frameData, ~unmount: unit => unit) => {
     } else {
       let _ = Js.Global.setTimeout(() => {
         unmount()
-      }, 5000)
+      }, 4950)
     }
   
     None
