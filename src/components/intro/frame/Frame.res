@@ -3,6 +3,7 @@
 type frameData = {
   text: string,
   duration: int,
+  image: Js.Option.t<string>
 }
 
 type frameStage =
@@ -13,9 +14,14 @@ type frameStage =
 let make = (~frameData: frameData, ~unmount: unit => unit) => {
   let (frameStage, setFrameStage) = React.useState(_ => Initial)
 
-  let frameStyle = switch frameStage {
-  | Initial => "frame fade-in"
-  | Final => "frame fade-out"
+  let fade = switch frameStage {
+  | Initial => "fade-in"
+  | Final => "fade-out"
+  }
+
+  let backgroundStyle = switch frameData.image {
+    | Some(img) => ReactDOM.Style.make(~backgroundImage = `url(${img}`, ())
+    | None => ReactDOM.Style.make(~backgroundColor = "#282c34", ())
   }
     
   React.useEffect1(() => {
@@ -26,13 +32,13 @@ let make = (~frameData: frameData, ~unmount: unit => unit) => {
     } else {
       let _ = Js.Global.setTimeout(() => {
         unmount()
-      }, frameData.duration * 1000)
+      }, 5000)
     }
   
     None
   }, [frameStage])
 
-  <div className=frameStyle>
+  <div className={"frame " ++ fade} style=backgroundStyle>
     <p>{React.string(frameData.text)}</p>
   </div>
 }

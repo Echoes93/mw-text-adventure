@@ -17,12 +17,13 @@ let initialState = {
 
 let hasMore = (arr, index) => Js.Array.length(arr) - 1 > index
 
-let reducer = (state, action) => {
+let reducer = (startGame) => (state, action) => {
   switch action {
   | UnmountFrame =>
-    if hasMore(IntroFrameData.frames, state.currentIndex) {
+    if hasMore(IntroData.frames, state.currentIndex) {
       {...state, currentIndex: state.currentIndex + 1}
     } else {
+      startGame()
       {...state, status: Finished}
     }
   }

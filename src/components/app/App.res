@@ -1,37 +1,19 @@
 %%raw(`import './App.css'`)
-
-type appActivity =
-  | Menu
-  | Intro
-  | Game
-
-type appState = {
-  currentActivity: appActivity
-}
-
-type appActionType =
-  | ChangeActivity(appActivity)
-
-let initialState = {
-  currentActivity: Menu
-}
-
-let appReducer = (_state, action) => {
-  switch action {
-  | ChangeActivity(activity) => { currentActivity: activity }
-  }
-}
+open AppReducer
 
 @react.component
 let make = () => {
   let (state, dispatch) = React.useReducer(appReducer, initialState)
 
+  let startIntro = () => dispatch(ChangeActivity(Intro))
+  let startGame = () => Game -> ChangeActivity -> dispatch
+
   <div className="App">
     {
       switch state.currentActivity {
-      | Menu => <Menu startGame={() => dispatch(ChangeActivity(Intro))} />
-      | Intro => <Intro />
-      | Game => React.null
+      | Menu => <Menu startIntro />
+      | Intro => <Intro startGame />
+      | Game => <Game />
       }
     }
   </div>
