@@ -24,19 +24,20 @@ let make = (~frameData: frameData, ~unmount: unit => unit) => {
   | None => ReactDOM.Style.make(~backgroundColor="#282c34", ())
   }
 
-  React.useEffect(() => {
-    if frameStage == Initial {
-      let _ = Js.Global.setTimeout(() => {
-        setFrameStage(_ => Final)
-      }, frameData.duration * 1000)
-    } else {
-      let _ = Js.Global.setTimeout(() => {
-        unmount()
-      }, 4950)
-    }
+  let setFinalStageTimer = () => {
+    let frameDurationTime = frameData.duration * 1000
+    let _ = Js.Global.setTimeout(() => setFrameStage(_ => Final), frameDurationTime)
+  }
 
-    None
-  })
+  let setUnmountTimer = () => {
+    let dramaticPause = 4950
+    let _ = Js.Global.setTimeout(() => unmount(), dramaticPause)
+  }
+
+  switch frameStage {
+    | Initial => setFinalStageTimer()
+    | Final => setUnmountTimer()
+  }
 
   <div className={"frame " ++ fade} style=backgroundStyle>
     <p> {React.string(frameData.text)} </p>
